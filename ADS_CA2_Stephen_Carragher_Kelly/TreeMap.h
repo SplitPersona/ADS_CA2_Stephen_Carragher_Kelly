@@ -5,13 +5,15 @@
 #include <utility>
 
 using namespace std;
+
 template <class K, class V>
 class TreeMap 
 {
 
-private:
+	private:
 	BinaryTree<pair<K, V>> tree;
-	int mapSize;
+	int mapSize = 0;
+
 	BSTNode<pair<K, V>>* findNode(const K& key) 
 	{
 		auto node = tree.root;
@@ -34,7 +36,9 @@ private:
 	}
 
 public:
-	TreeMap() :mapSize(0) {}
+
+	TreeMap() = default;
+
 	void clear() 
 	{
 		tree.clear();
@@ -51,7 +55,7 @@ public:
 		auto node = findNode(key);
 		if (!node)
 		{
-			throw invalid_argument("Key not found: " + to_string(key));
+			throw invalid_argument("Key not found");
 		}
 		return node->getItem().second;
 	}
@@ -106,7 +110,7 @@ public:
 		auto node = findNode(key);
 		if (!node)
 		{
-			throw invalid_argument("Key not found: " + to_string(key));
+			throw invalid_argument("Key not found");
 		}
 		return node->getItem().second;
 	}

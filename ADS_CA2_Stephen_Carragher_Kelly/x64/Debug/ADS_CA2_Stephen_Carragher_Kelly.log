@@ -1,0 +1,35 @@
+﻿  main.cpp
+C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\TreeMap.H(22,12): error C2248: 'BSTNode<T>::data': cannot access private member declared in class 'BSTNode<T>'
+C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\TreeMap.H(22,12): error C2248:         with
+C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\TreeMap.H(22,12): error C2248:         [
+C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\TreeMap.H(22,12): error C2248:             T=std::pair<char,BinaryTree<std::string>>
+C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\TreeMap.H(22,12): error C2248:         ]
+  (compiling source file 'main.cpp')
+      C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\BSTNode.h(12,4):
+      see declaration of 'BSTNode<T>::data'
+          with
+          [
+              T=std::pair<char,BinaryTree<std::string>>
+          ]
+      C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\BSTNode.h(6,7):
+      see declaration of 'BSTNode<T>'
+          with
+          [
+              T=std::pair<char,BinaryTree<std::string>>
+          ]
+      C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\TreeMap.H(22,12):
+      the template instantiation context (the oldest one first) is
+          C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\main.cpp(43,9):
+          see reference to class template instantiation 'TreeMap<char,BinaryTree<std::string>>' being compiled
+          C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\TreeMap.H(17,23):
+          while compiling class template member function 'BSTNode<T> *TreeMap<char,BinaryTree<std::string>>::findNode(const K &)'
+          with
+          [
+              T=std::pair<char,BinaryTree<std::string>>,
+              K=char
+          ]
+              C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\TreeMap.H(78,13):
+              see the first reference to 'TreeMap<char,BinaryTree<std::string>>::findNode' in 'TreeMap<char,BinaryTree<std::string>>::put'
+              C:\Users\StephenCarragher-Kel\Documents\ADS_CA2_Stephen_Carragher_Kelly\ADS_CA2_Stephen_Carragher_Kelly\main.cpp(45,18):
+              see the first reference to 'TreeMap<char,BinaryTree<std::string>>::put' in 'processFile'
+  

@@ -59,15 +59,61 @@ void displayLetters(TreeMap<char, BinaryTree<string>>& letterMap) {
 	cout << endl;
 }
 
-void displayWordsForLetter(TreeMap<char, BinaryTree<string>>& letterMap, char letter)
+void DisplayWords(TreeMap<char, BinaryTree<string>>& letterMap, char letter)
 {
 	letter = tolower(letter);
 	if (!letterMap.containsKey(letter)) {
-		cout << "No words found for the letter '" << letter << "'." << endl;
+		cout << "No words found for " << letter << "'." << endl;
 		return;
 	}
-	cout << "Words for the letter '" << letter << "':" << endl;
+	cout << "Words with the letter '" << letter << "':" << endl;
 	auto& tree = letterMap.get(letter);
 	tree.printInOrder();
 	cout << endl;
+}
+
+int main()
+{
+	TreeMap<char, BinaryTree<string>> letterMap;
+	string filename;
+	cout << "Enter the name of the file to process: ";
+	cin >> filename;
+	
+	processFile(filename, letterMap);
+	
+	char choice;
+	do
+	{
+		cout << "Menu:" << endl;
+		cout << "1. Display list of letters" << endl;
+		cout << "2. Display words of a specific letter" << endl;
+		cout << "3. Exit" << endl;
+		cout << "Enter a option: ";
+		cin >> choice;
+
+		switch (choice) 
+		{
+		case '1':
+			displayLetters(letterMap);
+			break;
+
+		case '2':
+			char letter;
+			cout << "Enter a letter: ";
+			cin >> letter;
+			DisplayWords(letterMap, letter);
+			break;
+
+		case '3':
+			cout << "Goodbye!" << endl;
+			break;
+
+		default:
+			cout << "Invalid option. Please try again." << endl;
+		}
+
+	}
+	while (choice != '3');
+
+	return 0;
 }

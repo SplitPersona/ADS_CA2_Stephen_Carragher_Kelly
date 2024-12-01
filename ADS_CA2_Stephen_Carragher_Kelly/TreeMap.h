@@ -11,9 +11,10 @@ class TreeMap
 {
 
 	private:
-	BinaryTree<pair<K, V>> tree;
-	int mapSize = 0;
+	BinaryTree<pair<K, V>> tree; //A tree to store the key values 
+	int mapSize = 0; 
 
+	// a funciton to find a node with a given key
 	BSTNode<pair<K, V>>* findNode(const K& key) 
 	{
 		auto node = tree.root;
@@ -23,7 +24,7 @@ class TreeMap
 			{
 				return node;
 			}
-			if (key < node->getItem().first)
+			if (key < node->getItem().first) // moves left or right based on the comparison
 			{
 				node = node->getLeft();
 			}
@@ -39,17 +40,18 @@ public:
 
 	TreeMap() = default;
 
-	void clear() 
+	void clear() // clears the tree
 	{
 		tree.clear();
 		mapSize = 0;
 	}
 
-	bool containsKey(const K& key)
+	bool containsKey(const K& key) // checks if the key exists in the maps
 	{
 		return findNode(key) != nullptr;
 	}
 
+	// gets the alue associted wiht the key
 	V& get(const K& key)
 	{
 		auto node = findNode(key);
@@ -60,7 +62,7 @@ public:
 		return node->getItem().second;
 	}
 
-	BinaryTree<K> keySet()
+	BinaryTree<K> keySet() //returns a binarytree with the all the keys of the map
 	{
 		BinaryTree<K> keysTree;
 		auto itemsArray = tree.toArray();
@@ -73,7 +75,7 @@ public:
 		return keysTree;
 	}
 
-	void put(const K& key, const V& value)
+	void put(const K& key, const V& value) //adds a key pair to the map
 	{
 		auto node = findNode(key);
 		if (node)
@@ -88,12 +90,12 @@ public:
 		}
 	}
 
-	int size() 
+	int size() //returns the number of elemenets in the map
 	{
 		return mapSize;
 	}
 
-	bool removeKey(const K& key) 
+	bool removeKey(const K& key) //removes the key pair form the map
 	{
 		auto node = findNode(key);
 		if (!node)
@@ -105,7 +107,7 @@ public:
 		return true;
 	}
 
-	V& operator[](const K& key)
+	V& operator[](const K& key) //overload the subscript operator to access values by key
 	{
 		auto node = findNode(key);
 		if (!node)

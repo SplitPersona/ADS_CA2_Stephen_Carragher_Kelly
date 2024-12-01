@@ -6,7 +6,7 @@
 #include "TreeMap.H"
 
 using namespace std;
-
+//the structure to store book data 
 struct Book 
 {
 	string name;
@@ -15,18 +15,18 @@ struct Book
 	float highestReview;
 	float lowestReview;
 
-	bool operator<(const Book& other) const
+	bool operator<(const Book& other) const // the less than operatoer for sorting
 	{
 		return name < other.name;
 	}
 
-	bool operator==(const Book& other) const
+	bool operator==(const Book& other) const// the equalit one
 	{
 		return name == other.name;
 	}
 };
 
-TreeMap<string, Book> loadBooks(const string& filename)
+TreeMap<string, Book> loadBooks(const string& filename) //loads the book from a CSV file into the treemap
 {
 	TreeMap<string, Book> bookMap;
 	ifstream file(filename);
@@ -36,7 +36,7 @@ TreeMap<string, Book> loadBooks(const string& filename)
 	}
 
 	string line;
-	getline(file, line);
+	getline(file, line);//skips the header
 
 	while (getline(file, line))
 	{
@@ -50,7 +50,7 @@ TreeMap<string, Book> loadBooks(const string& filename)
 		getline(ss, highestReviewStr, ',');
 		getline(ss, lowestReviewStr, ',');
 		
-		book.highestReview = stof(highestReviewStr);
+		book.highestReview = stof(highestReviewStr); //converst the string to floats
 		book.lowestReview = stof(lowestReviewStr);
 
 		bookMap.put(book.name, book);
@@ -62,11 +62,11 @@ TreeMap<string, Book> loadBooks(const string& filename)
 
 }
 
-void indexData(TreeMap<string, Book>& bookMap, string& field)
+void indexData(TreeMap<string, Book>& bookMap, string& field) //fuction to index dada on on a user decided field and display the count
 {
 	TreeMap<string, int> index;
 
-	auto keysTree = bookMap.keySet();
+	auto keysTree = bookMap.keySet(); // gets all the book names form the map
 	auto keys = keysTree.toArray();
 	int count = bookMap.size();
 
@@ -94,7 +94,7 @@ void indexData(TreeMap<string, Book>& bookMap, string& field)
 			return;
 		}
 
-		if (!index.containsKey(keyValue))
+		if (!index.containsKey(keyValue)) //update the count for the fields value in the index
 		{
 			index.put(keyValue, 1);
 		}
@@ -105,7 +105,7 @@ void indexData(TreeMap<string, Book>& bookMap, string& field)
 		}
 	}
 
-	delete[] keys;
+	delete[] keys; //frees the dynamice memory
 
 	cout << "Index of " << field << ":" << endl;
 	auto indexTree = index.keySet();
@@ -120,7 +120,7 @@ void indexData(TreeMap<string, Book>& bookMap, string& field)
 	delete[] indexArray;
 }
 
-void viewSubset(TreeMap<string, Book>& bookMap, string& field, string& value)
+void viewSubset(TreeMap<string, Book>& bookMap, string& field, string& value) //displays a subset of books based on a filter
 {
 	auto keysTree = bookMap.keySet();
 	auto keys = keysTree.toArray();
@@ -132,6 +132,7 @@ void viewSubset(TreeMap<string, Book>& bookMap, string& field, string& value)
 		const Book& book = bookMap.get(keys[i]);
 		string keyValue;
 
+		//checks if the field atchs the value
 		if ((field == "name" && book.name == value) || (field == "author" && book.author == value) || (field == "releaseDate" && book.releaseDate == value))
 		{
 			cout << "Name: " << book.name << ", Author: " << book.author << ", Release Date: " << book.releaseDate << ", Highest Review: " << book.highestReview << ", Lowest Review: " << book.lowestReview << endl;
@@ -147,7 +148,7 @@ int main()
 	cout << "Enter the name of the file to process: ";
 	cin >> filename;
 
-	TreeMap<string, Book> bookMap = loadBooks(filename);
+	TreeMap<string, Book> bookMap = loadBooks(filename); // loads the boo from the CSV file given
 
 	if (bookMap.size() == 0) 
 	{

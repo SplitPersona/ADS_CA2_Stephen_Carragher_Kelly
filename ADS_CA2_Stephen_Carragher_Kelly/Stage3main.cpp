@@ -7,7 +7,7 @@
 
 using namespace std;
 
-string toLower(const string& str) 
+string toLower(const string& str) //conversta a string to lower case
 {
 	string result = str;
 	for (char& c : result)
@@ -17,7 +17,7 @@ string toLower(const string& str)
 	return result;
 }
 
-void processFile(const string& filename, TreeMap<char, BinaryTree<string>>& letterMap)
+void processFile(const string& filename, TreeMap<char, BinaryTree<string>>& letterMap) //takes in a ile and filles the treeap with the words by the first letter
 {
 	ifstream file(filename);
 	if (!file.is_open()) {
@@ -26,40 +26,41 @@ void processFile(const string& filename, TreeMap<char, BinaryTree<string>>& lett
 	}
 
 	string line;
-	while (getline(file, line))
+	while (getline(file, line)) // reads this line by line
 	{
 		stringstream ss(line);
 		string word;
 		while (ss >> word)
 		{
-			size_t start = word.find_first_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+			size_t start = word.find_first_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"); // finds the startand end of alphabet letters
 			size_t end = word.find_last_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
 			if (start == string::npos || end == string::npos)
 			{
-				continue;
+				continue; //skip if no letters found
 			}
 
 			char firstLetter = word[0];
-			if (!letterMap.containsKey(firstLetter)) 
+			if (!letterMap.containsKey(firstLetter)) //if lettter is not in the tree it will add it to a empty one
 			{
 				letterMap.put(firstLetter, BinaryTree<string>());
 			}
 			auto& tree = letterMap.get(firstLetter);
-			tree.add(word);
+			tree.add(word); // adds the word to the tree
 
 		}
 	}
 	file.close();
 }
 
-void displayLetters(TreeMap<char, BinaryTree<string>>& letterMap) {
+void displayLetters(TreeMap<char, BinaryTree<string>>& letterMap) //displays the list o of letters in the tree
+{
 	cout << "Letters with words in the file:" << endl;
 	auto keysTree = letterMap.keySet();
 	keysTree.printInOrder();
 	cout << endl;
 }
 
-void DisplayWords(TreeMap<char, BinaryTree<string>>& letterMap, char letter)
+void DisplayWords(TreeMap<char, BinaryTree<string>>& letterMap, char letter) //showsn all the words associated wiht a certain letter
 {
 	letter = tolower(letter);
 	if (!letterMap.containsKey(letter)) {
@@ -68,13 +69,13 @@ void DisplayWords(TreeMap<char, BinaryTree<string>>& letterMap, char letter)
 	}
 	cout << "Words with the letter '" << letter << "':" << endl;
 	auto& tree = letterMap.get(letter);
-	tree.printInOrder();
+	tree.printInOrder(); // prints them out in order
 	cout << endl;
 }
 
 int main()
 {
-	TreeMap<char, BinaryTree<string>> letterMap;
+	TreeMap<char, BinaryTree<string>> letterMap; // the ap to hold the words organizedby the letter
 	string filename;
 	cout << "Enter the name of the file to process: ";
 	cin >> filename;
